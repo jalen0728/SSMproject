@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+<!--
+ 扫描注解的包 ,是被扫描的注解起作用
+base-package:此包或此包所有的子包中的类
+-->
+<context:component-scan base-package="com.hchedu.shop">
+	<!--排除扫描conroller这个注解  -->
+	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+<!-- 引入外部配置文件 -->
+<context:property-placeholder location="classpath:jdbc.properties"/>
+<!-- 
+	配置数据源 
+	class:配置数据源类型(c3p0-0.9.2.1.jar,mchange-commons-java-0.2.3.4.jar)
+	destroy-method:销毁方法
+	scope:指bean作用域 单例
+-->
+<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+destroy-method="close" scope="singleton">
+	<property name="driverClass" value="${jdbc.driver}"></property>
+	<property name="jdbcUrl" value="${jdbc.url}"></property>
+	<property name="user" value="${jdbc.username}"></property>
+	<property name="password" value="${jdbc.password}"></property>
+</bean>
+<!-- 创建sqlSessionFactory -->
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<!--引入数据源,ref=数据源的id  -->
+	<property name="dataSource" ref="dataSource"></property>
+	<!--引入mybatis全局配置文件 -->
+	<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	<!--引入mapper.xml文件  -->
+	<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+	<!--配置别名的包  -->
+	<property name="typeAliasesPackage" value="com.hchedu.shop.entities"></property>
+</bean>
+<!-- 配置mapper文件映射的扫描器,使指定包下的mapper接口生成相应的代理实现类 -->
+<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<!-- 指定扫描的包 -->
+	<property name="basePackage" value="com.hchedu.shop.dao"></property>
+	<!-- sqlSessionFactoryBean的name注入, -->
+	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+</bean>
+<!--配置事务管理器  管理使用数据源进行jdbc操作时发生的事务 -->
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<!-- 注入数据源 -->
+	<property name="dataSource" ref="dataSource"></property>
+</bean>
+<!-- 对@Transactional这个注解进行的驱动 -->
+<tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

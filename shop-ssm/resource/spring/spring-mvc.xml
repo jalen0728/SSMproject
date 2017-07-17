@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+	
+	<!--
+ 	扫描注解的包 ,是被扫描的注解起作用
+	base-package:此包或此包所有的子包中的类
+	use-default-filters:false 不适用默认的filters
+	-->
+	<context:component-scan base-package="com.hchedu.shop" use-default-filters="false">
+		<!-- 只扫描指定包下的指定注解Controller -->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<!-- 视图解析器 把逻辑视图解析成物理视图 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- view-name前缀 -->
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<!-- view-name后缀 -->
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 处理静态资源      解决静态资源被servletDispather拦截问题 -->
+	<mvc:default-servlet-handler />
+	<!-- 使用mvc注解驱动,会自动注册三个bean -->
+	<mvc:annotation-driven />
+
+
+	<!-- 配置 MultipartResolver
+		sspringmvc进行文件上传时 需要配置  id不能少
+	 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 字符编码 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 上传大小 -->
+		<property name="maxUploadSize" value="1024000"></property>
+	</bean>
+
+</beans>
