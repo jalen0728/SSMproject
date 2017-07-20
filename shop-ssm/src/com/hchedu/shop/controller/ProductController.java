@@ -51,11 +51,6 @@ public class ProductController {
 		map.put("model", product);
 		return "product";
 	}
-	//购物车
-	/*@RequestMapping("/cart_addCart")
-	public String addCart(){
-		return "cart";
-	}*/
 	//搜索商品
 	@RequestMapping("/seachProduct")
 	public String seachProduct(@RequestParam("proCategory") String proCategory,

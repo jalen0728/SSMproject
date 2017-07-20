@@ -1,5 +1,6 @@
 package com.hchedu.shop.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Orders {
 
     private Integer uid;
     
-    private List<OrderItem> orderItems;
+    private List<OrderItem> orderItems = new ArrayList<>();;
     
     private  User user;
 

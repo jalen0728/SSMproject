@@ -11,6 +11,7 @@ import com.hchedu.shop.dao.OrderItemMapper;
 import com.hchedu.shop.dao.OrdersMapper;
 import com.hchedu.shop.dao.ProductMapper;
 import com.hchedu.shop.entities.Cart;
+import com.hchedu.shop.entities.CartItems;
 import com.hchedu.shop.entities.OrderItem;
 import com.hchedu.shop.entities.Orders;
 import com.hchedu.shop.entities.Product;
@@ -20,8 +21,7 @@ import com.hchedu.shop.utils.PageBean;
 @Transactional
 @Service
 public class OrderServiceImpl implements OrderService {
-	@Autowired
-	private Order order;
+
 	@Autowired
 	private OrdersMapper ordersMapper;
 	@Autowired
@@ -62,10 +62,9 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 	@Override
-	public void addOrder(Orders orders) {
-		ordersMapper.insert(orders);
-		
+	public int saveorders(Orders order) {
+		int len=ordersMapper.add(order);
+		return len;
 	}
-	
 	
 }

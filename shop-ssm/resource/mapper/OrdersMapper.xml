@@ -11,6 +11,14 @@
     <result column="addr" property="addr" jdbcType="VARCHAR" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
   </resultMap>
+  <insert id="add" parameterType="com.hchedu.shop.entities.Orders" useGeneratedKeys="true" keyProperty="oid">
+  		insert into orders (oid, total, ordertime, 
+      state, name, phone, 
+      addr, uid)
+    values (#{oid,jdbcType=INTEGER}, #{total,jdbcType=DOUBLE}, #{ordertime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{addr,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER})
+  </insert>
   <select id="countByUid" resultType="int">
   	select count(*) from orders where uid=#{uid} 
   </select>

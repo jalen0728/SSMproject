@@ -31,4 +31,6 @@ public interface OrdersMapper {
 	List<Orders> selectByUid(@Param("uid") Integer uid,@Param("begin")  int begin,@Param("limit")  int limit);
 
 	int countByUid(Integer uid);
+
+	Integer add(Orders order);
 }

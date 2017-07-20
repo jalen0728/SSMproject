@@ -1,5 +1,7 @@
 package com.hchedu.shop.entities;
 
+import java.util.List;
+
 public class OrderItem {
     private Integer itemid;
 
@@ -12,6 +14,8 @@ public class OrderItem {
     private Integer oid;
     
     private Product product;
+    
+  
 
     public Integer getItemid() {
         return itemid;
@@ -60,6 +64,6 @@ public class OrderItem {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-    
-    
+
+	
 }

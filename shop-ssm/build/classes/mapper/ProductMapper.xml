@@ -25,6 +25,12 @@ and (cs.csname like '%女装%' or c.cname like '%女装%')  -->
   		<if test="proCategory!=null and proCategory.trim()!=''">
 	  		and cs.csname like '%${proCategory}%' or c.cname like '%${proCategory}%' 
 	  	</if> 
+	  	<if test="proPriceMin!=null and proPriceMax==null">
+	  		and p.shop_price &gt;= #{proPriceMin}
+	  	</if>
+	  	<if test="proPriceMin==null and proPriceMax!=null">
+	  		and p.shop_price &lt;= #{proPriceMax}
+	  	</if>
 	  	<if test="proPriceMin!=null and proPriceMax!=null  ">
 	  		and p.shop_price between #{proPriceMin} and #{proPriceMax}
 	  	</if>

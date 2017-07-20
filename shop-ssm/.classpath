@@ -33,8 +33,8 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-orm-4.2.4.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-test-4.2.4.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-tx-4.2.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-web-4.2.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-4.2.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-web-4.2.4.RELEASE.jar" sourcepath="D:/百吉/javaTool/jar/spring/spring-framework-4.0.0.RELEASE/libs/spring-web-4.0.0.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-4.2.4.RELEASE.jar" sourcepath="D:/百吉/javaTool/jar/spring/spring-framework-4.0.0.RELEASE/libs/spring-webmvc-portlet-4.0.0.RELEASE-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="build/classes"/>
